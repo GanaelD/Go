@@ -56,17 +56,6 @@ func readFile(path string) []byte {
 	return content
 }
 
-// returnStringFileContent uses readFile to return a
-// slice of string containing the content of the text file
-func stringFileContent(path string) []string {
-	content := readFile(path)
-	contentString := make([]string, len(content))
-	for i := 0; i < len(content); i++ {
-		contentString[i] = string(content[i])
-	}
-	return contentString
-}
-
 // TextFromFile returns a single string containing everything in the
 // file whose path is passed as argument.
 func TextFromFile(path string) string {
