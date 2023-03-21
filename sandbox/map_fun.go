@@ -73,6 +73,9 @@ func TextFromFile(path string) string {
 	return string(readFile(path))
 }
 
+// WordsInTextFile returns a map[string]int containing every distinct word
+// in the file whose path is passed as argument and the amount of times
+// they appear in the text.
 func WordsInTextFile(path string) map[string]int {
 	text := TextFromFile(path)
 	pattern := regexp.MustCompile("[[:punct:][:space:]]+")
