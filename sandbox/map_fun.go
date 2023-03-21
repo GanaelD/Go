@@ -3,6 +3,7 @@ package sandbox
 import (
 	"log"
 	"os"
+	"regexp"
 )
 
 // FindMaxValue finds the key of a map[string]int associated to the
@@ -57,7 +58,7 @@ func readFile(path string) []byte {
 
 // returnStringFileContent uses readFile to return a
 // slice of string containing the content of the text file
-func returnStringFileContent(path string) []string {
+func stringFileContent(path string) []string {
 	content := readFile(path)
 	contentString := make([]string, len(content))
 	for i := 0; i < len(content); i++ {
@@ -66,8 +67,17 @@ func returnStringFileContent(path string) []string {
 	return contentString
 }
 
+// TextFromFile returns a single string containing everything in the
+// file whose path is passed as argument.
+func TextFromFile(path string) string {
+	return string(readFile(path))
+}
+
 func WordsInTextFile(path string) map[string]int {
-	return SliceToMap(returnStringFileContent(path))
+	text := TextFromFile(path)
+	pattern := regexp.MustCompile("[[:punct:][:space:]]+")
+	words := pattern.Split(text, -1)
+	return SliceToMap(words)
 }
 
 // SwapKeysAndValues takes a map as input and returns
