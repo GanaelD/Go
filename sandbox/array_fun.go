@@ -28,6 +28,8 @@ func ReverseSlice(slice []int) []int {
 	for i := 0; i < length/2; i++ {
 		res[i], res[length-(i+1)] = slice[length-(i+1)], slice[i]
 	}
+	// If the slice has an odd number of elements, this block is necessary to
+	// obtain the element in the middle.
 	if length%2 != 0 {
 		res[length/2] = slice[length/2]
 	}
