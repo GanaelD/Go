@@ -20,7 +20,7 @@ func SumEven(slice []int) int {
 	return sum
 }
 
-// ReverseSlice returns a new slice that is the slice passed as an argument
+// ReverseSlice returns a new slice that is the slice passed as an argument (holding integer values)
 // with all of its elements reversed.
 func ReverseSlice(slice []int) []int {
 	length := len(slice)
@@ -36,9 +36,9 @@ func ReverseSlice(slice []int) []int {
 	return res
 }
 
-// ReverseSlice returns a new slice that is the slice passed as an argument (can hold any kind of values)
+// ReverseSliceG returns a new slice that is the slice passed as an argument (whom can hold any kind of values)
 // with all of its elements reversed.
-func ReverseSliceF[E comparable](slice []E) []E {
+func ReverseSliceG[E comparable](slice []E) []E {
 	length := len(slice)
 	res := make([]E, length)
 	for i := 0; i < length/2; i++ {

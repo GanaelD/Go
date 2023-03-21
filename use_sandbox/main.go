@@ -19,7 +19,7 @@ func main() {
 	evenSum := sandbox.SumEven(slice)
 
 	reversedSlice := sandbox.ReverseSlice(slice)
-	reversedSliceString := sandbox.ReverseSliceF(sliceString) // equivalent to sandbox.ReverseSliceF[string](sliceString)
+	reversedSliceString := sandbox.ReverseSliceG(sliceString) // equivalent to sandbox.ReverseSliceF[string](sliceString)
 
 	toPrint := fmt.Sprintf("The sum is %v, the even sum is %v and the slice in reverse order is %v", sum, evenSum, reversedSlice)
 
