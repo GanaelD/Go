@@ -35,3 +35,19 @@ func ReverseSlice(slice []int) []int {
 	}
 	return res
 }
+
+// ReverseSlice returns a new slice that is the slice passed as an argument (can hold any kind of values)
+// with all of its elements reversed.
+func ReverseSliceF[E comparable](slice []E) []E {
+	length := len(slice)
+	res := make([]E, length)
+	for i := 0; i < length/2; i++ {
+		res[i], res[length-(i+1)] = slice[length-(i+1)], slice[i]
+	}
+	// If the slice has an odd number of elements, this block is necessary to
+	// obtain the element in the middle.
+	if length%2 != 0 {
+		res[length/2] = slice[length/2]
+	}
+	return res
+}
