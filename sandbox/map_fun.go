@@ -1,9 +1,11 @@
 package sandbox
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"regexp"
+	"sort"
 )
 
 // FindMaxValue finds the key of a map[string]int associated to the
@@ -72,6 +74,14 @@ func WordsInTextFile(path string) map[string]int {
 	return SliceToMap(words)
 }
 
+// WordsInString returns a map[string]int containing every distinct word in the string
+// associated to their number of appearances in the string.
+func WordsInString(text string) map[string]int {
+	pattern := regexp.MustCompile("[[:punct:][:space:]]+")
+	words := pattern.Split(text, -1)
+	return SliceToMap(words)
+}
+
 // SwapKeysAndValues takes a map as input and returns
 // a new map where the keys and values of the input map
 // have been swapped.
@@ -81,4 +91,17 @@ func SwapKeysAndValues[K comparable, V comparable](m *map[K]V) map[V]K {
 		res[value] = key
 	}
 	return res
+}
+
+// PrintInOrder prints the key/value pairs of the input map[string]int in alphabetical order.
+func PrintInOrder(m map[string]int) {
+	orderedKeys := []string{}
+
+	for k := range m {
+		orderedKeys = append(orderedKeys, k)
+	}
+	sort.Strings(orderedKeys)
+	for _, key := range orderedKeys {
+		fmt.Printf("Key: %v, value: %v\t\t", key, m[key])
+	}
 }
