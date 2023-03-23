@@ -48,9 +48,8 @@ func GetInputInMap() map[string]int {
 	return res
 }
 
-// ReadText reads a text input from the user and returns a map where the keys are the
-// distinct words and the values the number of times they appear in the text.
-func ReadText() map[string]int {
+// ReadText reads a text input from the user and returns it.
+func ReadText() string {
 	scanner := bufio.NewScanner(os.Stdin)
 
 	fmt.Println("Please enter your text:")
@@ -59,7 +58,5 @@ func ReadText() map[string]int {
 	}
 	text := scanner.Text()
 	// This is to make no difference between capital and non capital letters.
-	text = strings.ToLower(text)
-	// The distinct words and the number of times they appear in the string.
-	return WordsInString(text)
+	return strings.ToLower(text)
 }

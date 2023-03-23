@@ -5,5 +5,7 @@ import (
 )
 
 func main() {
-	sandbox.PrintInOrder(sandbox.ReadText())
+	text := sandbox.ReadText()
+	words := sandbox.WordsInString(text)
+	sandbox.PrintInOrder(words)
 }
