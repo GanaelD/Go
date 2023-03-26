@@ -2,7 +2,6 @@ package sandbox
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"regexp"
 	"sort"
@@ -35,17 +34,17 @@ func SliceToMap(slice []string) map[string]int {
 	return m
 }
 
-// readFile is a function used to fetch the content of a text file and put
-// it inside a slice of bytes.
-func readFile(path string) []byte {
+// readFile is a function used to fetch the content of a text file and put it inside a slice of bytes.
+// Also returns whatever error occurs.
+func readFile(path string) ([]byte, error) {
 	file, err := os.Open(path)
+	var content []byte = []byte{}
 	if err != nil {
-		log.Fatalf("The path %v does not exist or could not be found", path)
+		return content, fmt.Errorf("No path was found at adress %v", path)
 	}
 	defer file.Close()
 
 	// Read the content of the file.
-	var content []byte
 	buf := make([]byte, 1024)
 
 	for {
@@ -55,23 +54,30 @@ func readFile(path string) []byte {
 		}
 		content = append(content, buf[:n]...)
 	}
-	return content
+	return content, nil
 }
 
-// TextFromFile returns a single string containing everything in the
-// file whose path is passed as argument.
-func TextFromFile(path string) string {
-	return string(readFile(path))
+// TextFromFile returns a single string containing everything in the file whose path is passed as argument.
+// If an error occurs, the error is returned as well.
+func TextFromFile(path string) (string, error) {
+	content, err := readFile(path)
+	if err != nil {
+		return "", err
+	}
+	return string(content), nil
 }
 
-// WordsInTextFile returns a map[string]int containing every distinct word
-// in the file whose path is passed as argument and the amount of times
-// they appear in the text.
-func WordsInTextFile(path string) map[string]int {
-	text := TextFromFile(path)
+// WordsInTextFile returns a map[string]int containing every distinct word in the file
+// whose path is passed as argument and the amount of times they appear in the text
+// and an error if an error occured.
+func WordsInTextFile(path string) (map[string]int, error) {
+	text, err := TextFromFile(path)
+	if err != nil {
+		return nil, err
+	}
 	pattern := regexp.MustCompile("[[:punct:][:space:]]+")
 	words := pattern.Split(text, -1)
-	return SliceToMap(words)
+	return SliceToMap(words), nil
 }
 
 // WordsInString returns a map[string]int containing every distinct word in the string

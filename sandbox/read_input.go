@@ -54,9 +54,37 @@ func ReadText() string {
 
 	fmt.Println("Please enter your text:")
 	if !scanner.Scan() {
-		log.Fatalf("Invalid text. Exiting the function.")
+		log.Fatalln("Invalid text. Exiting the function.")
 	}
 	text := scanner.Text()
 	// This is to make no difference between capital and non capital letters.
 	return strings.ToLower(text)
+}
+
+// ReadNumbers reads a list of numbers from the user and returns it.
+func ReadNumbers() []float64 {
+	scanner := bufio.NewScanner(os.Stdin)
+	var text string
+	var numbersStr []string
+	var numbers []float64
+Prompt:
+	fmt.Println("Please enter a list of numbers (separated by spaces):")
+	if !scanner.Scan() {
+		fmt.Println("Invalid input.")
+		goto Prompt
+	}
+	text = scanner.Text()
+	// The numbers must be separated by spaces.
+	numbersStr = strings.Split(text, " ")
+	numbers = []float64{}
+	for _, nbStr := range numbersStr {
+		// Try to convert part of the input to a float; asks the user for another list if there is an error.
+		nb, err := strconv.ParseFloat(nbStr, 64)
+		if err != nil {
+			fmt.Println("Your input contains an invalid number. Try again.")
+			goto Prompt
+		}
+		numbers = append(numbers, nb)
+	}
+	return numbers
 }
