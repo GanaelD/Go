@@ -7,11 +7,11 @@ import (
 	"sort"
 )
 
-// FindMaxValue finds the key of a map[string]int associated to the
-// highest value. If the map is empty || is nil, FindMaxValue returns an empty string.
-func FindMaxValue(myMap map[string]int) string {
+// FindMaxValue finds the key of a map[string]int associated to thehighest value.
+// If the map is empty || is nil, FindMaxValue returns an empty string and an error.
+func FindMaxValue(myMap map[string]int) (string, error) {
 	if len(myMap) == 0 {
-		return ""
+		return "", fmt.Errorf("the map is empty")
 	}
 	max := 0
 	maxKey := ""
@@ -20,7 +20,7 @@ func FindMaxValue(myMap map[string]int) string {
 			maxKey, max = key, value
 		}
 	}
-	return maxKey
+	return maxKey, nil
 }
 
 // SliceToMap converts a slice of string to a map[string]int where
