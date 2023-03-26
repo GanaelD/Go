@@ -40,7 +40,7 @@ func readFile(path string) ([]byte, error) {
 	file, err := os.Open(path)
 	var content []byte = []byte{}
 	if err != nil {
-		return content, fmt.Errorf("No path was found at adress %v", path)
+		return content, fmt.Errorf("no path was found at adress %v", path)
 	}
 	defer file.Close()
 
