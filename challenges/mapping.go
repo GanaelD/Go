@@ -80,3 +80,17 @@ func CsvToJson(path string) ([]byte, error) {
 	}
 	return data, nil
 }
+
+// JsonToPerson converts json objects to Person structs
+func JsonToPerson(jsonObj []byte) ([]Person, error) {
+	// The returned slice containing Person structs
+	persons := []Person{}
+
+	// Unmarshal the json object in persons
+	err := json.Unmarshal(jsonObj, &persons)
+	if err != nil {
+		fmt.Println("err:", err)
+		return nil, err
+	}
+	return persons, nil
+}
