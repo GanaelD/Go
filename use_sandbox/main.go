@@ -1,10 +1,11 @@
 package main
 
 import (
-	"example.com/sandbox"
+	"example.com/interfaces"
 )
 
 func main() {
-
-	sandbox.PrintStatistics(sandbox.ReadNumbers())
+	fp := interfaces.FilePrinter{Output: "file.txt"}
+	toPrint := "This is a test. Please remain calm."
+	fp.Print([]byte(toPrint))
 }
