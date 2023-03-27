@@ -46,7 +46,7 @@ func csvToStruct(path string) ([]Person, error) {
 		return nil, err
 	}
 
-	// The variable that will contain the Person
+	// The slice that will contain the Person structs
 	persons := []Person{}
 
 	// Convert the []string into Person
